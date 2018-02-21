@@ -47,4 +47,40 @@ class ReunionTest < Minitest::Test
     assert_equal 2, reunion.activities.length
     assert_equal 'surfing', reunion.activities.last.name
   end
+
+  def test_total_cost_of_reunion
+    participants = {
+      'Adam': 300,
+    }
+    activity = Activity.new('hiking', participants)
+    reunion = Reunion.new('beach', activity)
+
+    participants2 = {
+      'Kelly': 150,
+      'Matt': 450
+    }
+    activity2 = Activity.new('surfing', participants2)
+    reunion.add_activity(activity2)
+
+    assert_equal 900, reunion.total_cost
+  end
+
+  def test_total_breakdown_of_reunion
+    participants = {
+      'Adam': 300,
+      'Kelly': 150,
+      'Matt': 450
+    }
+    activity = Activity.new('hiking', participants)
+    participants2 = {
+      'Adam': 100,
+      'Kelly': 460,
+      'Matt': 370
+    }
+    activity2 = Activity.new('surfing', participants2)
+    reunion = Reunion.new('beach', activity)
+    reunion.add_activity(activity2)
+
+    assert_equal 'Adam owes 210. Kelly paid the right amount. Matt overpaid by 210.', reunion.debt_analyzer
+  end
 end
