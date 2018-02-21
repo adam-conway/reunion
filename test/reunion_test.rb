@@ -81,6 +81,6 @@ class ReunionTest < Minitest::Test
     reunion = Reunion.new('beach', activity)
     reunion.add_activity(activity2)
 
-    assert_equal 'Adam owes 210. Kelly paid the right amount. Matt overpaid by 210.', reunion.debt_analyzer
+    assert_equal 'Adam owes 210. Kelly paid the right amount. Matt overpaid by 210.', reunion.reunion_debt_analyzer
   end
 end

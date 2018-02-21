@@ -21,8 +21,26 @@ class Reunion
     cost
   end
 
-  def debt_analyzer
-    # names = @activities.map {|activity| activity.people.keys}.flatten.uniq
+  def reunion_debt_analyzer
+    people = @activities.map {|activity| activity.people.keys}.flatten.uniq
+    breakdown = @activities.map do |activity|
+      activity.debt_analyzer
+    end
+
+    breakdown2 = breakdown.map do |activity|
+      activity.split('.')
+    end.flatten
+
+    breakdown3 = breakdown2.map do |persons_debts|
+      if persons_debts.include?('right')
+        0
+      elsif persons_debts.include?('owes')
+        -persons_debts.split[-1].to_i
+      elsif persons_debts.include?('overpaid')
+        persons_debts.split[-1].to_i
+      end
+    end
+
     binding.pry
 
   end
