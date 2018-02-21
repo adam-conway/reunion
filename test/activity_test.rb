@@ -50,4 +50,26 @@ class ActivityTest < Minitest::Test
 
     assert_equal 450, activity.sum_cost
   end
+
+  def test_splitting_cost_of_activity
+    participants = {
+      'Adam': 300,
+      'Kelly': 150,
+      'Matt': 450
+    }
+    activity = Activity.new('hiking', participants)
+
+    assert_equal 300, activity.split_cost
+  end
+
+  def test_telling_people_what_they_owe
+    participants = {
+      'Adam': 300,
+      'Kelly': 150,
+      'Matt': 450
+    }
+    activity = Activity.new('hiking', participants)
+
+    assert_equal 'Adam paid the right amount. Kelly owes 150. Matt overpaid by 150.', activity.debt_analyzer
+  end
 end
