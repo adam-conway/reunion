@@ -31,6 +31,7 @@ class Reunion
       activity.split('.')
     end.flatten
 
+    #determines owed or owes for each activity and each person
     breakdown3 = breakdown2.map do |persons_debts|
       if persons_debts.include?('right')
         0
@@ -40,8 +41,5 @@ class Reunion
         persons_debts.split[-1].to_i
       end
     end
-
-    binding.pry
-
   end
 end
